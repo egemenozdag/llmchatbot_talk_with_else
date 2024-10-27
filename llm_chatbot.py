@@ -4,11 +4,11 @@ from datasets import Dataset
 import torch
 
 # 1. Veriyi Yükleme ve Filtreleme
-def load_and_filter_data(file_path, speaker="Miláčku"):
+def load_and_filter_data(file_path, speaker="---"):
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
-    # Sevgilinin mesajlarını filtreleme
+    # mesajlarını filtreleme
     filtered_messages = []
     for line in lines:
         if f"{speaker}:" in line:
@@ -26,8 +26,8 @@ def prepare_dataset(filtered_messages):
 # 3. Modeli Eğitme
 def train_model(dataset):
     # Tokenizer ve Modeli yükleme
-    model = GPT2LMHeadModel.from_pretrained("C:/projects/llmbot_deneme/gpt2/")
-    tokenizer = GPT2Tokenizer.from_pretrained("C:/projects/llmbot_deneme/gpt2/")
+    model = GPT2LMHeadModel.from_pretrained("gpt2/")
+    tokenizer = GPT2Tokenizer.from_pretrained("gpt2/")
 
     # Padding token'ı ayarlama
     tokenizer.pad_token = tokenizer.eos_token  # `eos_token`'ı padding olarak kullanabilirsiniz
@@ -85,10 +85,10 @@ def chat_with_bot():
 # Ana Akış
 if __name__ == "__main__":
     # Veri dosyasının yolu
-    file_path = "ezgi_chat.txt"
+    file_path = "----.txt"
 
-    # Sevgilinin konuşmalarını filtrele
-    filtered_messages = load_and_filter_data(file_path, speaker="Miláčku")
+    #  konuşmalarını filtrele
+    filtered_messages = load_and_filter_data(file_path, speaker="----")
 
     # Dataset hazırlama
     dataset = prepare_dataset(filtered_messages)
